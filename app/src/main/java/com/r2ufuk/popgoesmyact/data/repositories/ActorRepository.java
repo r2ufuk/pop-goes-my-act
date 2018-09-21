@@ -1,0 +1,17 @@
+package com.r2ufuk.popgoesmyact.data.repositories;
+
+import com.r2ufuk.popgoesmyact.domain.entities.Actor;
+import com.r2ufuk.popgoesmyact.domain.repositories.ActorRepositoryInterface;
+
+import java.util.List;
+
+import io.reactivex.Observable;
+
+public class ActorRepository implements ActorRepositoryInterface {
+
+    @Override
+    public Observable<List<Actor>> popularActors() {
+        return null;
+    }
+}
+
