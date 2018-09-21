@@ -1,7 +1,7 @@
 package com.r2ufuk.popgoesmyact.domain.interactors;
 
 import com.r2ufuk.popgoesmyact.domain.entities.Actor;
-import com.r2ufuk.popgoesmyact.domain.repository.ActorRepository;
+import com.r2ufuk.popgoesmyact.domain.repositories.ActorRepositoryInterface;
 
 import java.util.List;
 
@@ -9,13 +9,13 @@ import io.reactivex.Observable;
 
 public class GetPopularActors {
 
-    private final ActorRepository actorRepository;
+    private final ActorRepositoryInterface actorRepositoryInterface;
 
-    GetPopularActors(ActorRepository actorRepository){
-        this.actorRepository = actorRepository;
+    GetPopularActors(ActorRepositoryInterface actorRepositoryInterface){
+        this.actorRepositoryInterface = actorRepositoryInterface;
     }
 
     public Observable<List<Actor>> execute(){
-        return this.actorRepository.popularActors();
+        return this.actorRepositoryInterface.popularActors();
     }
 }
