@@ -6,8 +6,8 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public interface ActorRepositoryInterface {
+public abstract class ActorRepositoryInterface {
 
-    Observable<List<Actor>> popularActors();
+    public abstract Observable<List<Actor>> popularActors();
 
 }

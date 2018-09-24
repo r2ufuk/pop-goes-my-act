@@ -1,72 +1,35 @@
 package com.r2ufuk.popgoesmyact.data.web;
 
-import com.r2ufuk.popgoesmyact.data.constants.Constant;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.r2ufuk.popgoesmyact.data.entities.ActorData;
+import com.r2ufuk.popgoesmyact.data.entities.ActorDataDeserialization;
 
 import java.io.IOException;
-import java.util.concurrent.Callable;
+import java.net.InetAddress;
+import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
 
-public class Api implements Callable<JSONObject> {
+public class Api {
 
-    private static final String baseUrl = Constant.base_url;
-    private static final String apiKey = Constant.api_key;
+    public Api() {}
 
-    private String url;
-    private JSONObject response;
+    public Observable<List<ActorData>> actorDataList(int pageNum){
+        ApiUtil apiUtil = ApiUtil.getPageApi(pageNum);
 
-    private Api(int pageNum) {
-        this.url = buildApiUrl(pageNum);
+        return Observable.create((ObservableEmitter<List<ActorData>> emitter) -> {
+
+            String responseStr = apiUtil.getResponse();
+            if (responseStr != null) {
+                emitter.onNext(ActorDataDeserialization.createActorDataList(responseStr));
+                emitter.onComplete();
+            }
+        });
     }
 
-    public static Api getPageApi(int pageNum) {
-        return new Api(pageNum);
+    private boolean checkConnection() throws IOException, InterruptedException {
+//        String command = "ping -c 1 themoviedb.org";
+//        return (Runtime.getRuntime().exec(command).waitFor() == 0);
+        return InetAddress.getByName("themoviedb.org").isReachable(2000);
     }
-
-    private String buildApiUrl(int pageNum) {
-        return baseUrl +
-                "?" +
-                "api_key=" +
-                apiKey +
-                "&" +
-                "page=" +
-                Integer.toString(pageNum);
-    }
-
-    private OkHttpClient buildClient() {
-        return new OkHttpClient();
-    }
-
-    private Request buildRequest() {
-        return new Request.Builder()
-                .url(this.url)
-                .get()
-                .build();
-    }
-
-    private void requestResponse() {
-        OkHttpClient client = buildClient();
-        Request request = buildRequest();
-        try {
-            String resStr = client.newCall(request).execute().body().string();
-            response = new JSONObject(resStr);
-        } catch (JSONException | IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private JSONObject getResponse() {
-        requestResponse();
-        return response;
-    }
-
-    @Override
-    public JSONObject call() {
-        return getResponse();
-    }
-
 }

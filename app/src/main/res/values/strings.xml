@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Pop! Goes My Act</string>
 
-    <string name="tmdb_api_base_url">https://api.themoviedb.org/3/person/popular</string>
     <string name="tmdb_image_base_url">http://image.tmdb.org/t/p/w200</string>
-    <string name="tmdb_api_key_dev">4cd07563a49b9c87f0976ec83944afba</string>
 
+    <string name="image_description">No Image? :(</string>
 </resources>

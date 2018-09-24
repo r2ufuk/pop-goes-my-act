@@ -7,15 +7,17 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public class GetPopularActors {
+public class GetPopularActors extends UseCase<List<Actor>> {
 
-    private final ActorRepositoryInterface actorRepositoryInterface;
+    private ActorRepositoryInterface actorRepositoryInterface;
 
-    GetPopularActors(ActorRepositoryInterface actorRepositoryInterface){
+    public GetPopularActors(ActorRepositoryInterface actorRepositoryInterface){
         this.actorRepositoryInterface = actorRepositoryInterface;
     }
 
-    public Observable<List<Actor>> execute(){
+
+    @Override
+    Observable<List<Actor>> buildUseCaseObservable() {
         return this.actorRepositoryInterface.popularActors();
     }
 }
