@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="5dp"
@@ -8,7 +13,6 @@
     android:orientation="horizontal"
     tools:ignore="UseCompoundDrawables">
 
-
     <ImageView
         android:id="@+id/actorImage"
         android:layout_width="75dp"
@@ -16,7 +20,9 @@
         android:adjustViewBounds="false"
         android:baselineAligned="false"
         android:contentDescription="@string/image_description"
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
+        app:srcCompat="@android:drawable/ic_menu_gallery"
+    />
+
 
     <TextView
         android:id="@+id/actorName"
@@ -29,16 +35,18 @@
         android:paddingRight="5dp"
         android:singleLine="true"
         android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/actorPopularity"
-        android:layout_width="33dp"
+        android:layout_width="49dp"
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:gravity="center"
         android:singleLine="true"
         android:textColor="#484848"
-        android:textSize="28sp" />
+        android:textSize="24sp" />
 
 </LinearLayout>
+
+</layout>

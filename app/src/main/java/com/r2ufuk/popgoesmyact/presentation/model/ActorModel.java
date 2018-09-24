@@ -12,4 +12,20 @@ public class ActorModel {
         this.popularity = popularity;
         this.profile_path = profile_path;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public double getPopularity() {
+        return popularity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProfile_path() {
+        return profile_path;
+    }
 }

@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.r2ufuk.popgoesmyact.R;
 import com.r2ufuk.popgoesmyact.presentation.model.ActorModel;
+import com.r2ufuk.popgoesmyact.presentation.view_model.ActorViewModel;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +30,7 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.Acto
         this.actorList = Collections.emptyList();
     }
 
-    public void setActorList(List<ActorModel> actorList){
+    public void setActorList(List<ActorModel> actorList) {
         this.actorList = actorList;
         this.notifyDataSetChanged();
     }
@@ -42,7 +44,13 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.Acto
 
     @Override
     public void onBindViewHolder(@NonNull ActorViewHolder actorViewHolder, int i) {
+        ActorModel actorModel = actorList.get(i);
+        actorViewHolder.actorName.setText(actorModel.getName());
+        actorViewHolder.actorPopularity.setText(String.format(Locale.US, "%.2f", actorModel.getPopularity()));
+        if (actorModel.getProfile_path() != null) {
 
+            ActorViewModel.loadImage(actorViewHolder.actorImage, actorModel.getProfile_path());
+        }
     }
 
     @Override
@@ -50,10 +58,13 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.Acto
         return (this.actorList != null) ? this.actorList.size() : 0;
     }
 
-    static class ActorViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.actorImage) ImageView actorImage;
-        @BindView(R.id.actorName) TextView actorName;
-        @BindView(R.id.actorPopularity) TextView actorPopularity;
+    static class ActorViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.actorImage)
+        ImageView actorImage;
+        @BindView(R.id.actorName)
+        TextView actorName;
+        @BindView(R.id.actorPopularity)
+        TextView actorPopularity;
 
         public ActorViewHolder(@NonNull View itemView) {
             super(itemView);

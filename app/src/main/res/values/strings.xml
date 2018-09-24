@@ -1,7 +1,4 @@
 <resources>
     <string name="app_name">Pop! Goes My Act</string>
-
-    <string name="tmdb_image_base_url">http://image.tmdb.org/t/p/w200</string>
-
     <string name="image_description">No Image? :(</string>
 </resources>
