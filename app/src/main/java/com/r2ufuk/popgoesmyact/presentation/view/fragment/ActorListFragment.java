@@ -49,7 +49,6 @@ public class ActorListFragment extends BaseFragment implements ActorListView{
         final View fragmentView = inflater.inflate(R.layout.actor_list_fragment, container, false);
         ButterKnife.bind(this, fragmentView);
         setupRecyclerView();
-        Log.d("mytag", "Im alive :)");
         return fragmentView;
     }
 

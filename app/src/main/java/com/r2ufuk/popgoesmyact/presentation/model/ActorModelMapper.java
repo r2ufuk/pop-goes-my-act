@@ -17,6 +17,9 @@ public class ActorModelMapper {
 
     public static List<ActorModel> mapList(List<Actor> actorList) {
         List<ActorModel> actorModelList = new ArrayList<>(20);
+        if (actorList.size() == 0) {
+            return null;
+        }
         for (Actor actor : actorList) {
             actorModelList.add(map(actor));
         }

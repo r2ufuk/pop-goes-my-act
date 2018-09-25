@@ -9,6 +9,6 @@ import io.reactivex.Observable;
 
 public interface ActorDataProvider {
 
-    Observable<List<ActorData>> actorList(int pageNum);
+    Observable<List<ActorData>> actorList();
 
 }

@@ -13,6 +13,8 @@ import com.r2ufuk.popgoesmyact.R;
 import com.r2ufuk.popgoesmyact.presentation.model.ActorModel;
 import com.r2ufuk.popgoesmyact.presentation.view_model.ActorViewModel;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -27,11 +29,15 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.Acto
 
     public ActorListAdapter(Context context) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.actorList = Collections.emptyList();
+        this.actorList = new ArrayList<>();
     }
 
     public void setActorList(List<ActorModel> actorList) {
-        this.actorList = actorList;
+        if(actorList == null){
+            this.actorList.clear();
+        } else{
+            this.actorList.addAll(actorList);
+        }
         this.notifyDataSetChanged();
     }
 

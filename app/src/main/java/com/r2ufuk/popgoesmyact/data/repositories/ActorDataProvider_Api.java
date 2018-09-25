@@ -11,12 +11,15 @@ public class ActorDataProvider_Api implements ActorDataProvider {
 
     private Api api;
 
+    private final int VISIBLE_PAGE_MAX = 10;
+
+
     ActorDataProvider_Api(Api api){
         this.api = api;
     }
 
     @Override
-    public Observable<List<ActorData>> actorList(int pageNum) {
-        return this.api.actorDataList(pageNum);
+    public Observable<List<ActorData>> actorList() {
+        return this.api.actorDataList(VISIBLE_PAGE_MAX);
     }
 }
