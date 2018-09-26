@@ -1,6 +1,5 @@
 package com.r2ufuk.popgoesmyact.presentation.model;
 
-import com.r2ufuk.popgoesmyact.data.entities.ActorData;
 import com.r2ufuk.popgoesmyact.domain.entities.Actor;
 
 import java.util.ArrayList;

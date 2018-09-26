@@ -2,6 +2,7 @@ package com.r2ufuk.popgoesmyact.data.repositories;
 
 import com.r2ufuk.popgoesmyact.data.entities.ActorData;
 import com.r2ufuk.popgoesmyact.data.web.Api;
+import com.r2ufuk.popgoesmyact.data.web.ApiUtil;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class ActorDataProvider_Api implements ActorDataProvider {
 
     private Api api;
 
-    private final int VISIBLE_PAGE_MAX = 10;
+    private final int VISIBLE_PAGE_MAX = ApiUtil.PAGE_MAX;
 
 
     ActorDataProvider_Api(Api api){

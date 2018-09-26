@@ -1,6 +1,5 @@
 package com.r2ufuk.popgoesmyact.data.repositories;
 
-import com.r2ufuk.popgoesmyact.data.entities.ActorDataDeserialization;
 import com.r2ufuk.popgoesmyact.data.web.Api;
 
 public class ActorDataProviderFactory {

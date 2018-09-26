@@ -14,32 +14,43 @@ import com.r2ufuk.popgoesmyact.presentation.model.ActorModel;
 import com.r2ufuk.popgoesmyact.presentation.view_model.ActorViewModel;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+//@Inject
+@Singleton
 public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHolder> {
 
-    private List<ActorModel> actorList;
+    private List<ActorModel> actorList = new ArrayList<>();
+    private List<ActorModel> backupList = new ArrayList<>();
     private final LayoutInflater layoutInflater;
 
+
+
+    @Inject
     public ActorListAdapter(Context context) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.actorList = new ArrayList<>();
     }
 
-    public void setActorList(List<ActorModel> actorList) {
-        if(actorList == null){
-            this.actorList.clear();
+    public void setActorList(List<ActorModel> paraActorList) {
+        if(paraActorList == null){
+            actorList.clear();
         } else{
-            this.actorList.addAll(actorList);
+            actorList.addAll(paraActorList);
         }
+        backupList.clear();
+        backupList.addAll(actorList);
         this.notifyDataSetChanged();
     }
+
+
+
 
     @NonNull
     @Override
@@ -59,9 +70,29 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.Acto
         }
     }
 
+    public void filterList(String query) {
+        actorList.clear();
+        if(query.equals("") || query.isEmpty()){
+            actorList.addAll(backupList);
+        } else{
+            query = query.toLowerCase();
+            for(ActorModel actorModel: backupList){
+                if(actorModel.getName().toLowerCase().contains(query)){
+                    actorList.add(actorModel);
+                }
+            }
+        }
+        this.notifyDataSetChanged();
+    }
+
+    public void printListCount(TextView view){
+        view.setText(Integer.toString(getItemCount()));
+    }
+
+
     @Override
     public int getItemCount() {
-        return (this.actorList != null) ? this.actorList.size() : 0;
+        return (actorList != null) ? actorList.size() : 0;
     }
 
     static class ActorViewHolder extends RecyclerView.ViewHolder {
@@ -72,7 +103,7 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.Acto
         @BindView(R.id.actorPopularity)
         TextView actorPopularity;
 
-        public ActorViewHolder(@NonNull View itemView) {
+        ActorViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

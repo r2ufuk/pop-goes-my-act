@@ -3,6 +3,7 @@ package com.r2ufuk.popgoesmyact.presentation.presenter;
 import android.support.annotation.NonNull;
 
 import com.r2ufuk.popgoesmyact.domain.entities.Actor;
+
 import com.r2ufuk.popgoesmyact.domain.interactors.GetPopularActors;
 import com.r2ufuk.popgoesmyact.domain.interactors.Observer;
 import com.r2ufuk.popgoesmyact.presentation.model.ActorModel;
@@ -22,11 +23,10 @@ public class ActorListPresenter implements Presenter {
     }
 
     public void initialize() {
-        this.loadUserList();
+        this.loadActorList();
     }
 
-    private void loadUserList() {
-//        presentHideRetry();
+    private void loadActorList() {
         getActorList();
     }
 
@@ -50,14 +50,6 @@ public class ActorListPresenter implements Presenter {
         this.getPopularActors.execute(new ActorListObserver());
     }
 
-    private void presentShowRetry() {
-        this.actorListView.showRetry();
-    }
-
-    private void presentHideRetry() {
-        this.actorListView.hideRetry();
-    }
-
     private void presentError(String errorMessage) {
         this.actorListView.showError(errorMessage);
     }
@@ -77,4 +69,5 @@ public class ActorListPresenter implements Presenter {
             presentError(e.getMessage());
         }
     }
+
 }

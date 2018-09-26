@@ -1,6 +1,5 @@
 package com.r2ufuk.popgoesmyact.data.entities;
 
-import com.r2ufuk.popgoesmyact.data.web.ApiUtil;
 import com.r2ufuk.popgoesmyact.domain.entities.Actor;
 
 import java.util.ArrayList;

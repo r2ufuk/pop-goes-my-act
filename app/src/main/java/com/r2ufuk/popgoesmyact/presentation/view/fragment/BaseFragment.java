@@ -6,7 +6,7 @@ import android.widget.Toast;
 public class BaseFragment extends Fragment{
 
     protected void toastyMessage(String str) {
-        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), str, Toast.LENGTH_LONG).show();
     }
 
 }

@@ -1,31 +1,29 @@
 package com.r2ufuk.popgoesmyact.presentation.activity;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
+import android.widget.SearchView;
+import android.widget.TextView;
 
-import com.android.volley.Cache;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.RequestFuture;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.r2ufuk.popgoesmyact.R;
+import com.r2ufuk.popgoesmyact.presentation.view.adapter.ActorListAdapter;
 import com.r2ufuk.popgoesmyact.presentation.view.fragment.ActorListFragment;
 
-import java.io.UnsupportedEncodingException;
-import java.util.concurrent.ExecutionException;
+import java.util.Objects;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-import static com.android.volley.toolbox.Volley.newRequestQueue;
 
 
 public class MainActivity extends BaseActivity {
+
+    @BindView(R.id.search) SearchView search;
+    @BindView(R.id.mainWindow) LinearLayout mainWindow;
+    @BindView(R.id.searchCount) TextView searchCount;
+
+    ActorListAdapter actorListAdapter;
+    ActorListFragment actorListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +31,60 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        actorListAdapter = new ActorListAdapter(this);
+        actorListFragment = new ActorListFragment();
+        actorListFragment.setAdapter(actorListAdapter);
+
+
         if (savedInstanceState == null) {
-            addFragment(R.id.listContainer, new ActorListFragment());
+            addFragment(R.id.listContainer, actorListFragment);
         }
 
+        this.search.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        actorListAdapter.filterList(query);
+                        actorListAdapter.printListCount(searchCount);
+                        unFocus();
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String query) {
+                        actorListAdapter.filterList(query);
+                        actorListAdapter.printListCount(searchCount);
+                        return true;
+                    }
+                }
+                );
+
+
+        this.search.setOnCloseListener(() -> {
+            actorListAdapter.filterList("");
+            searchCount.setText("");
+            unFocus();
+            return true;
+        });
+
+//        mainWindow.setOnTouchListener((v, event) -> {
+//            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+//            return true;
+//        });
+
     }
+
+    private void unFocus(){
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
+        }
+    }
+
+
+
+
+
 
 }

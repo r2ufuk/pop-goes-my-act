@@ -1,9 +1,7 @@
 package com.r2ufuk.popgoesmyact.data.web;
 
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.android.volley.Cache;
 import com.android.volley.RequestQueue;
@@ -11,7 +9,6 @@ import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.r2ufuk.popgoesmyact.data.constants.Constant;
 import com.r2ufuk.popgoesmyact.presentation.MyApplication;
-
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -26,7 +23,7 @@ public class ApiUtil {
 
     private RequestQueue requestQueue;
 
-    private static final int PAGE_MAX = 100;
+    public static final int PAGE_MAX = 40;
 
     private static final int WAIT_DURATION = 25; //in milliseconds
 
